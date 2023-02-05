@@ -1,6 +1,6 @@
 import { Chat } from 'phosphor-react';
 import * as Popover from '@radix-ui/react-popover';
-import { WidgetForm } from '../components/WidgetForm';
+import { WidgetForm } from '../../components/WidgetForm';
 import { trpc } from '../../../utils/trcp';
 
 export default function Home() {
@@ -14,8 +14,8 @@ export default function Home() {
             <h1 className='text-4xl text-white font-bold'>{data?.greeting}</h1>
             <Popover.Root>
                 <Popover.Portal>
-                    <Popover.Content align="end" sideoffset={16}>
-                        <WigdgetForm />
+                    <Popover.Content align="end" sideOffset={16}>
+                        <WidgetForm />
                     </Popover.Content>
                 </Popover.Portal>
 
