@@ -4,21 +4,21 @@ const styles = StyleSheet.create({
     boxTitle: {
         margin:20,
         marginTop: 45,
-        padding: 10,
+        padding: 5,
         borderColor: '#fff',
-        borderWidth: 1,
+        borderWidth: 0.5,
         flexDirection:'row'
     },
     text: {
         color: '#fff',
-        marginTop: 20,
+        marginTop: 30,
         fontSize: 25,
         fontWeight: 500,
     },
     img: {
-        width: 70, 
-        height: 70,
-        marginLeft: 145,
+        width: 100, 
+        height: 100,
+        marginLeft: 125,
     }
   })
 
