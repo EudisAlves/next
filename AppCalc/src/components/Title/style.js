@@ -14,11 +14,12 @@ const styles = StyleSheet.create({
         marginTop: 30,
         fontSize: 25,
         fontWeight: 500,
+        marginLeft: 10,
     },
     img: {
         width: 100, 
         height: 100,
-        marginLeft: 125,
+        marginLeft: 105,
     }
   })
 
