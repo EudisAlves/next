@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+
 import Title from './src/components/Title/index.jsx'
 import SelectCarne from './src/components/SelectCarne/index.jsx';
 
