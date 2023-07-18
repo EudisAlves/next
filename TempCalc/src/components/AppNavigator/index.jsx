@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeScreen from '../HomeScren';
 import ProfileScreen from '../ProfileScreen';
+import CaldosScreen from '../CaldosScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -12,17 +13,26 @@ const AppNavigator = () => (
     <NavigationContainer>
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
+        name="Espetos"
         component={HomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Icon name="home" color={color} size={size} />
+            <Icon name="skewer" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name="Completo"
         component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="user" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Caldos"
+        component={CaldosScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name="user" color={color} size={size} />

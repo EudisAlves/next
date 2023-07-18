@@ -4,7 +4,7 @@ import styles from './style'
 export default function Title() {
     return (
         <View style={styles.BoxTitle}>
-            <Text>Controle de Tempero</Text>
+            <Text style={styles.text}>Controle de Tempero</Text>
         </View>
     )
 }
