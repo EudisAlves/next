@@ -5,7 +5,6 @@ import Title from './src/components/Title';
 
 export default function App() {
   return (
-  
     <AppNavigator/>
   );
 }
