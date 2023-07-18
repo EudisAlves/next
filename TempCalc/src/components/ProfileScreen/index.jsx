@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import styles from './style'
 
 
 const ProfileScreen = () => (
-    <View>
+    <View style={styles.box}>
       <Text>Profile Screen</Text>
     </View>
   );
