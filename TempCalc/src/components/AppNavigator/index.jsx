@@ -7,6 +7,7 @@ import ProfileScreen from '../ProfileScreen';
 import CaldosScreen from '../CaldosScreen';
 
 
+
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => (
@@ -17,7 +18,7 @@ const AppNavigator = () => (
         component={HomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Icon name="skewer" color={color} size={size} />
+            <Icon name="fire" color={color} size={size} />
           ),
         }}
       />
@@ -26,7 +27,7 @@ const AppNavigator = () => (
         component={ProfileScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Icon name="user" color={color} size={size} />
+            <Icon name="cutlery" color={color} size={size} />
           ),
         }}
       />
@@ -35,7 +36,7 @@ const AppNavigator = () => (
         component={CaldosScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Icon name="user" color={color} size={size} />
+            <Icon name="spoon" color={color} size={size} />
           ),
         }}
       />
