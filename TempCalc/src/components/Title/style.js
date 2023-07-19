@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     BoxTitle: {
       height: 90,
-      backgroundColor: '#444',    
+      backgroundColor: '#fb0303',    
     },
     text: {
       color: '#fff',
