@@ -11,14 +11,16 @@ const HomeScreen = () => {
   const [quantidadeOleo, setQuantidadeOleo] = useState('');
   const [quantidadeLimao, setQuantidadeLimao] = useState('');
   const [quantidadeLouro, setQuantidadeLouro] = useState('');
+  const [pesoCarneMessage, setPesoCarneMessage] = useState('');
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
-    calcularQuantidades(pesoCarne, option);
+    calcularQuantidades(pesoCarneMessage, option);
   };
-
+  
   const handlePesoChange = (text) => {
     setPesoCarne(text);
+    setPesoCarneMessage(text); // Store the value for sharing
     calcularQuantidades(text, selectedOption);
   };
 
@@ -35,7 +37,7 @@ const HomeScreen = () => {
       setQuantidadeLimao('');
       setQuantidadeLouro('');
     } else if (option === 'Bovina') {
-      const quantidadeTempero = (60 * parseFloat(peso)).toFixed(0);
+      const quantidadeTempero = (50 * parseFloat(peso)).toFixed(0);
       const quantidadeAlho = (25 * parseFloat(peso)).toFixed(0);
       const quantidadeOleo = (4 * parseFloat(peso)).toFixed(0);
 
@@ -82,6 +84,8 @@ const HomeScreen = () => {
     let message = `Tipo de carne: ${selectedOption}\n\n`;
 
     if (selectedOption !== '') {
+      
+      message += `Peso da carne: ${pesoCarneMessage} kg\n`;
       message += `Tempero: ${quantidadeTempero}g\n`;
 
       if (selectedOption === 'Frango') {
@@ -165,6 +169,8 @@ const HomeScreen = () => {
 
         {selectedOption !== '' && (
           <View style={styles.temperoContainer}>
+            <Text style={styles.temperoText}>Tipo de carne: {selectedOption}</Text>
+            <Text style={styles.temperoText}>Peso da carne: {pesoCarne} kg</Text>
             <Text style={styles.temperoText}>Tempero: {quantidadeTempero}g</Text>
             {selectedOption === 'Frango' && (
               <>
