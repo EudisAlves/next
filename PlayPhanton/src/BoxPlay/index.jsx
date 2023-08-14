@@ -1,118 +1,84 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import TrackPlayer, {
-  useProgress,
-  useTrackPlayerEvents,
-  TrackPlayerEvents,
-} from 'react-native-track-player';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import TrackPlayer from 'react-native-track-player';
 
-const BoxPlay = ({ track }) => {
+const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const { position, duration } = useProgress();
-  const rating = music ? music.RATING_HEART : 0;
 
   useEffect(() => {
     setupPlayer();
+    loadMusic();
   }, []);
 
   const setupPlayer = async () => {
     await TrackPlayer.setupPlayer();
-    await TrackPlayer.add({
-      id: track.id,
-      url: track.url,
-      title: track.title,
-      artist: track.artist,
-      artwork: track.artwork,
+    TrackPlayer.addEventListener('playback-queue-ended', () => {
+      // Ouvinte para quando a fila de reprodução termina (opcional)
+      console.log('Queue ended.');
     });
   };
 
-  useTrackPlayerEvents([TrackPlayerEvents.PLAYBACK_STATE], (event) => {
-    if (event.state === TrackPlayer.STATE_PLAYING) {
-      setIsPlaying(true);
+  const loadMusic = async () => {
+    await TrackPlayer.reset();
+    await TrackPlayer.add({
+      id: '1',
+      url: 'https://www.youtube.com/watch?v=2cZ_EFAmj08&list=RD2cZ_EFAmj08&start_radio=1',
+      title: 'Nome da Música',
+      artist: 'Nome do Artista',
+      artwork: 'URL_DA_IMAGEM_DA_MUSICA',
+    });
+  };
+
+  const togglePlayback = async () => {
+    if (isPlaying) {
+      await TrackPlayer.pause();
     } else {
-      setIsPlaying(false);
+      await TrackPlayer.play();
     }
-  });
-
-  const startMusic = async () => {
-    await TrackPlayer.play();
+    setIsPlaying(!isPlaying);
   };
 
-  const pauseMusic = async () => {
-    await TrackPlayer.pause();
+  const skipToPrevious = async () => {
+    await TrackPlayer.skipToPrevious();
   };
 
-  const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = Math.floor(seconds % 60);
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  const skipToNext = async () => {
+    await TrackPlayer.skipToNext();
   };
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri: track.artwork }} style={styles.artwork} />
-      <Text style={styles.title}>{track.title}</Text>
-      <Text style={styles.artist}>{track.artist}</Text>
-      <View style={styles.controls}>
-        <TouchableOpacity onPress={isPlaying ? pauseMusic : startMusic}>
-          <Text style={styles.playPauseButton}>{isPlaying ? 'Pause' : 'Play'}</Text>
-        </TouchableOpacity>
-        <Text style={styles.duration}>{formatTime(position)}</Text>
-        <View style={styles.progressContainer}>
-          <View
-            style={[styles.progressBar, { width: (position / duration) * 100 + '%' }]}
-          />
-        </View>
-        <Text style={styles.duration}>{formatTime(duration)}</Text>
-      </View>
+      <TouchableOpacity style={styles.button} onPress={skipToPrevious}>
+        <Text style={styles.buttonText}>Voltar</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={togglePlayback}>
+        <Text style={styles.buttonText}>{isPlaying ? 'Pause' : 'Play'}</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={skipToNext}>
+        <Text style={styles.buttonText}>Avançar</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    padding: 20,
-  },
-  artwork: {
-    width: 200,
-    height: 200,
-    borderRadius: 10,
-    marginBottom: 10,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  artist: {
-    fontSize: 16,
-    marginBottom: 20,
-  },
-  controls: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  playPauseButton: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginRight: 20,
-  },
-  duration: {
-    fontSize: 16,
-  },
-  progressContainer: {
     flex: 1,
-    height: 2,
-    backgroundColor: '#ccc',
-    marginLeft: 10,
-    marginRight: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  progressBar: {
-    height: 2,
-    backgroundColor: 'blue',
+  button: {
+    marginHorizontal: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#3498db',
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 
-export default BoxPlay;
+export default MusicPlayer;

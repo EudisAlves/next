@@ -1,19 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { AppRegistry } from 'react-native';
+import { View } from 'react-native';
+import { name as appName } from './app.json';
 import BoxPlay from './src/BoxPlay';
 
-export default function App() {
+
+const App = () => {
   return (
-    <View style={styles.container}>
-     <BoxPlay />
+    <View style={{ flex: 1 }}>
+      <BoxPlay />
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    
-  },
-});
+export default App;
